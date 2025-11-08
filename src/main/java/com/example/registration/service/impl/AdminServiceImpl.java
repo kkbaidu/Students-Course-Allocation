@@ -80,6 +80,24 @@ public class AdminServiceImpl implements AdminService {
     }
     
     @Override
+    public void deleteProgramme(Long id) {
+        Programme programme = programmeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Programme", "id", id));
+        
+        // Check if programme has courses
+        if (!courseRepository.findByProgramme(programme).isEmpty()) {
+            throw new IllegalStateException("Cannot delete programme with associated courses");
+        }
+        
+        // Check if programme has students
+        if (!studentRepository.findByProgramme(programme).isEmpty()) {
+            throw new IllegalStateException("Cannot delete programme with enrolled students");
+        }
+        
+        programmeRepository.delete(programme);
+    }
+    
+    @Override
     public CourseDto createCourse(CourseDto dto) {
         if (courseRepository.existsByCourseCode(dto.getCourseCode())) {
             throw new DuplicateResourceException("Course with code " + dto.getCourseCode() + " already exists");
@@ -143,6 +161,22 @@ public class AdminServiceImpl implements AdminService {
     }
     
     @Override
+    public void deleteCourse(Long id) {
+        Course course = courseRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Course", "id", id));
+        
+        // Check if course has registrations
+        if (!registrationRepository.findByCourse(course).isEmpty()) {
+            throw new IllegalStateException("Cannot delete course with student registrations");
+        }
+        
+        // Delete course assignments first
+        assignmentRepository.deleteByCourse(course);
+        
+        courseRepository.delete(course);
+    }
+    
+    @Override
     public String assignInstructorToCourse(Long courseId, AssignInstructorDto dto) {
         Course course = courseRepository.findById(courseId)
                 .orElseThrow(() -> new ResourceNotFoundException("Course", "id", courseId));
@@ -166,6 +200,20 @@ public class AdminServiceImpl implements AdminService {
         assignmentRepository.save(assignment);
         
         return "Instructor successfully assigned to course";
+    }
+    
+    @Override
+    public void removeInstructorFromCourse(Long courseId, Long instructorId) {
+        Course course = courseRepository.findById(courseId)
+                .orElseThrow(() -> new ResourceNotFoundException("Course", "id", courseId));
+        
+        User instructor = userRepository.findById(instructorId)
+                .orElseThrow(() -> new ResourceNotFoundException("Instructor", "id", instructorId));
+        
+        CourseAssignment assignment = assignmentRepository.findByCourseAndInstructor(course, instructor)
+                .orElseThrow(() -> new ResourceNotFoundException("Course assignment not found"));
+        
+        assignmentRepository.delete(assignment);
     }
     
     @Override
@@ -262,6 +310,22 @@ public class AdminServiceImpl implements AdminService {
     }
     
     @Override
+    public void deleteStudent(Long id) {
+        Student student = studentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Student", "id", id));
+        
+        // Delete course registrations first
+        registrationRepository.deleteByStudent(student);
+        
+        // Delete student
+        User user = student.getUser();
+        studentRepository.delete(student);
+        
+        // Delete associated user account
+        userRepository.delete(user);
+    }
+    
+    @Override
     public InstructorDto createInstructor(CreateInstructorDto dto) {
         if (userRepository.existsByUsername(dto.getUsername())) {
             throw new DuplicateResourceException("Username already exists");
@@ -337,6 +401,25 @@ public class AdminServiceImpl implements AdminService {
         Instructor instructor = instructorRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Instructor", "id", id));
         return mapToInstructorDto(instructor);
+    }
+    
+    @Override
+    public void deleteInstructor(Long id) {
+        Instructor instructor = instructorRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Instructor", "id", id));
+        
+        User user = instructor.getUser();
+        
+        // Check if instructor has course assignments
+        if (assignmentRepository.existsByInstructor(user)) {
+            throw new IllegalStateException("Cannot delete instructor with assigned courses. Remove course assignments first.");
+        }
+        
+        // Delete instructor
+        instructorRepository.delete(instructor);
+        
+        // Delete associated user account
+        userRepository.delete(user);
     }
     
     @Override

@@ -22,6 +22,10 @@ public interface CourseAssignmentRepository extends JpaRepository<CourseAssignme
     
     boolean existsByCourseAndInstructor(Course course, User instructor);
     
+    boolean existsByInstructor(User instructor);
+    
+    void deleteByCourse(Course course);
+    
     List<CourseAssignment> findByActiveTrue();
     
     List<CourseAssignment> findByInstructorIdAndActiveTrue(Long instructorId);

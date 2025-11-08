@@ -49,6 +49,13 @@ public class AdminController {
         return ResponseEntity.ok(programme);
     }
     
+    @DeleteMapping("/programmes/{id}")
+    @Operation(summary = "Delete programme", description = "Delete a programme by ID (only if no courses or students are associated)")
+    public ResponseEntity<String> deleteProgramme(@PathVariable Long id) {
+        adminService.deleteProgramme(id);
+        return ResponseEntity.ok("Programme deleted successfully");
+    }
+    
     // Course Management
     @PostMapping("/courses")
     public ResponseEntity<CourseDto> createCourse(@Valid @RequestBody CourseDto dto) {
@@ -77,6 +84,13 @@ public class AdminController {
         return ResponseEntity.ok(course);
     }
     
+    @DeleteMapping("/courses/{id}")
+    @Operation(summary = "Delete course", description = "Delete a course by ID (only if no student registrations exist)")
+    public ResponseEntity<String> deleteCourse(@PathVariable Long id) {
+        adminService.deleteCourse(id);
+        return ResponseEntity.ok("Course deleted successfully");
+    }
+    
     // Course Assignment
     @PostMapping("/courses/{id}/assign-instructor")
     public ResponseEntity<String> assignInstructorToCourse(
@@ -84,6 +98,15 @@ public class AdminController {
             @Valid @RequestBody AssignInstructorDto dto) {
         String message = adminService.assignInstructorToCourse(id, dto);
         return ResponseEntity.ok(message);
+    }
+    
+    @DeleteMapping("/courses/{courseId}/instructors/{instructorId}")
+    @Operation(summary = "Remove instructor from course", description = "Remove an instructor assignment from a course")
+    public ResponseEntity<String> removeInstructorFromCourse(
+            @PathVariable Long courseId,
+            @PathVariable Long instructorId) {
+        adminService.removeInstructorFromCourse(courseId, instructorId);
+        return ResponseEntity.ok("Instructor removed from course successfully");
     }
     
     // Student Management
@@ -108,6 +131,13 @@ public class AdminController {
     public ResponseEntity<List<StudentDto>> getAllStudents() {
         List<StudentDto> students = adminService.getAllStudents();
         return ResponseEntity.ok(students);
+    }
+    
+    @DeleteMapping("/students/{id}")
+    @Operation(summary = "Delete student", description = "Delete a student account and all associated registrations")
+    public ResponseEntity<String> deleteStudent(@PathVariable Long id) {
+        adminService.deleteStudent(id);
+        return ResponseEntity.ok("Student deleted successfully");
     }
     
     // Instructor Management
@@ -139,6 +169,13 @@ public class AdminController {
     public ResponseEntity<InstructorDto> getInstructorById(@PathVariable Long id) {
         InstructorDto instructor = adminService.getInstructorById(id);
         return ResponseEntity.ok(instructor);
+    }
+    
+    @DeleteMapping("/instructors/{id}")
+    @Operation(summary = "Delete instructor", description = "Delete an instructor account (only if no course assignments exist)")
+    public ResponseEntity<String> deleteInstructor(@PathVariable Long id) {
+        adminService.deleteInstructor(id);
+        return ResponseEntity.ok("Instructor deleted successfully");
     }
     
     // Registration Management

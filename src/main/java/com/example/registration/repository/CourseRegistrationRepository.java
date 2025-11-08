@@ -27,6 +27,8 @@ public interface CourseRegistrationRepository extends JpaRepository<CourseRegist
     
     boolean existsByStudentAndCourse(Student student, Course course);
     
+    void deleteByStudent(Student student);
+    
     List<CourseRegistration> findByStudentAndSemesterAndAcademicYear(
         Student student, 
         Semester semester, 
