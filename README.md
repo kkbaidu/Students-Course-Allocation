@@ -1,378 +1,727 @@
-# Student Course Registration System# Student Course Registration System
+# Student Course Registration System# Student Course Registration System# Student Course Registration System
 
-[![Java](https://img.shields.io/badge/Java-17-orange.svg)](https://www.oracle.com/java/)A comprehensive university course registration system similar to the University of Ghana MIS Web, built with **Java 17** and **Spring Boot 3**.
+[![Java](https://img.shields.io/badge/Java-17-orange.svg)](https://www.oracle.com/java/)[![Java](https://img.shields.io/badge/Java-17-orange.svg)](https://www.oracle.com/java/)A comprehensive university course registration system similar to the University of Ghana MIS Web, built with **Java 17** and **Spring Boot 3**.
 
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.0-brightgreen.svg)](https://spring.io/projects/spring-boot)
 
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Neon-blue.svg)](https://neon.tech/)## 🎯 Overview
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Neon-blue.svg)](https://neon.tech/)[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.0-brightgreen.svg)](https://spring.io/projects/spring-boot)
 
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This system manages student course registration with three user roles: **ADMIN**, **INSTRUCTOR**, and **STUDENT**. It provides a complete backend REST API following clean architecture principles and best practices.
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Neon-blue.svg)](https://neon.tech/)## 🎯 Overview
 
-A comprehensive REST API backend for university student course registration, inspired by the University of Ghana MIS Web system. This system provides role-based access control for students, instructors, and administrators with JWT authentication.
+A comprehensive REST API backend for university student course registration, inspired by the University of Ghana MIS Web system. Features JWT authentication, role-based access control, and interactive API documentation.
 
-## ✨ Features
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 📋 Table of Contents
 
-### 👨‍💼 Admin Features
+This system manages student course registration with three user roles: **ADMIN**, **INSTRUCTOR**, and **STUDENT**. It provides a complete backend REST API following clean architecture principles and best practices.
 
 - [Features](#-features)
 
-- [System Architecture](#-system-architecture)- ✅ Create and manage programmes (e.g., BSc Computer Science)
+- [Technology Stack](#-technology-stack)A comprehensive REST API backend for university student course registration, inspired by the University of Ghana MIS Web system. This system provides role-based access control for students, instructors, and administrators with JWT authentication.
 
-- [Technology Stack](#-technology-stack)- ✅ Create courses with programme, level, and semester assignments
+- [Getting Started](#-getting-started)
 
-- [Getting Started](#-getting-started)- ✅ Assign instructors to courses
+- [API Documentation](#-api-documentation)## ✨ Features
 
-- [API Documentation](#-api-documentation)- ✅ Create student accounts and assign them to programmes and levels
+- [User Roles](#-user-roles)
 
-- [Database Schema](#-database-schema)- ✅ Open/close registration periods for specific semesters
+- [Security](#-security)## 📋 Table of Contents
+
+- [Project Structure](#-project-structure)
+
+- [Documentation](#-documentation)### 👨‍💼 Admin Features
+
+## ✨ Features- [Features](#-features)
+
+### For Students- [System Architecture](#-system-architecture)- ✅ Create and manage programmes (e.g., BSc Computer Science)
+
+- 📚 Browse courses filtered by programme, level, and semester
+
+- ✍️ Register for courses during open registration periods- [Technology Stack](#-technology-stack)- ✅ Create courses with programme, level, and semester assignments
+
+- 📋 View personal course registrations
+
+- 🔍 Check course details and credit hours- [Getting Started](#-getting-started)- ✅ Assign instructors to courses
+
+### For Instructors- [API Documentation](#-api-documentation)- ✅ Create student accounts and assign them to programmes and levels
+
+- 👨‍🏫 View assigned courses
+
+- 👥 Access student lists for courses- [Database Schema](#-database-schema)- ✅ Open/close registration periods for specific semesters
+
+- 📊 Monitor course enrollments
 
 - [User Roles & Permissions](#-user-roles--permissions)- ✅ View all registered students per course
 
-- [Security](#-security)
+### For Administrators
 
-- [Project Structure](#-project-structure)### 👨‍🏫 Instructor Features
+- 🏫 Manage programmes and courses- [Security](#-security)
 
-- [Configuration](#-configuration)
+- 👨‍🎓 Create student accounts
 
-- [Testing](#-testing)- ✅ View all assigned courses
+- 👨‍🏫 Create instructor accounts and assign to courses- [Project Structure](#-project-structure)### 👨‍🏫 Instructor Features
 
-- [Deployment](#-deployment)- ✅ View list of students registered for each course
+- 🗓️ Control registration periods
 
-- [Contributing](#-contributing)
+- 📈 Full system oversight- [Configuration](#-configuration)
 
-- [License](#-license)### 👨‍🎓 Student Features
+### System Features- [Testing](#-testing)- ✅ View all assigned courses
 
-## ✨ Features- ✅ View available courses for their programme, level, and current semester
+- 🔐 JWT-based authentication
 
-- ✅ Register for courses (only when registration is open)
+- 🛡️ Role-based access control- [Deployment](#-deployment)- ✅ View list of students registered for each course
 
-### Student Features- ✅ View registered courses
+- 📝 Input validation
 
-- 👤 User authentication with JWT tokens- ✅ Prevented from duplicate course registration
+- ⚠️ Global exception handling- [Contributing](#-contributing)
 
-- 📚 Browse available courses filtered by programme, level, and semester- ✅ Restricted to courses matching their programme and level
+- 📊 Interactive Swagger/OpenAPI documentation
 
-- ✍️ Register for courses during open registration periods
+- 🗄️ PostgreSQL with Neon cloud hosting- [License](#-license)### 👨‍🎓 Student Features
 
-- 📋 View personal course registrations## 🏗️ Architecture
+## 🛠️ Technology Stack## ✨ Features- ✅ View available courses for their programme, level, and current semester
 
-- 🔍 Check course prerequisites and credit hours
+| Component | Technology |- ✅ Register for courses (only when registration is open)
 
-The application follows a **clean layered architecture**:
+|-----------|-----------|
 
-### Instructor Features
+| Backend Framework | Spring Boot 3.2.0 |### Student Features- ✅ View registered courses
 
-- 👨‍🏫 View assigned courses```
+| Language | Java 17 |
 
-- 👥 Access student lists for assigned courses┌─────────────────────────────────────┐
+| Security | Spring Security + JWT |- 👤 User authentication with JWT tokens- ✅ Prevented from duplicate course registration
 
-- 📊 Monitor course enrollments│ Controller Layer (REST) │
+| Database | PostgreSQL (Neon) |
 
-├─────────────────────────────────────┤
+| ORM | Spring Data JPA + Hibernate |- 📚 Browse available courses filtered by programme, level, and semester- ✅ Restricted to courses matching their programme and level
 
-### Administrator Features│ Service Layer (Business) │
+| Documentation | Springdoc OpenAPI (Swagger) |
 
-- 🏫 Create and manage academic programmes (BSc CS, BSc IT, etc.)├─────────────────────────────────────┤
+| Build Tool | Maven |- ✍️ Register for courses during open registration periods
 
-- 📖 Create and manage courses with prerequisites│ Repository Layer (Data Access) │
+## 🚀 Getting Started- 📋 View personal course registrations## 🏗️ Architecture
 
-- 👨‍🎓 Create student accounts with programme assignment├─────────────────────────────────────┤
+### Prerequisites- 🔍 Check course prerequisites and credit hours
 
-- 👨‍🏫 Create instructor accounts and manage profiles│ Domain Layer (Entities) │
+- Java 17+The application follows a **clean layered architecture**:
 
-- 🔗 Assign instructors to courses└─────────────────────────────────────┘
+- Maven 3.6+
 
-- 🗓️ Open and close course registration periods```
+- PostgreSQL (or Neon account)### Instructor Features
 
-- 📈 Full system oversight
+### Installation- 👨‍🏫 View assigned courses```
 
-### Technology Stack
+1. **Clone the repository**- 👥 Access student lists for assigned courses┌─────────────────────────────────────┐
 
-### System Features
+   ````bash
 
-- 🔐 JWT-based stateless authentication- **Java 17**
+   git clone https://github.com/kkbaidu/Students-Course-Allocation.git- 📊 Monitor course enrollments│ Controller Layer (REST) │
 
-- 🛡️ Role-based access control (RBAC)- **Spring Boot 3.2.0**
+   cd Students-Course-Allocation
 
-- 📝 Comprehensive input validation- **Spring Security** with JWT authentication
+   ```├─────────────────────────────────────┤
 
-- ⚠️ Global exception handling- **Spring Data JPA** with Hibernate
+   ````
 
-- 📊 Interactive Swagger/OpenAPI documentation- **PostgreSQL** (primary database)
+2. **Configure environment variables**### Administrator Features│ Service Layer (Business) │
 
-- 🗄️ PostgreSQL database with Neon cloud hosting- **H2** (testing)
-
-- 🚀 RESTful API design- **Lombok** (reduce boilerplate)
-
-- 📱 CORS-enabled for frontend integration- **Maven** (build tool)
-
-- **Bean Validation** (DTO validation)
-
-## 🏗️ System Architecture
-
-## 📦 Domain Model
-
-```````
-
-┌─────────────────────────────────────────────────────────────┐### Entities
-
-│                     Client Applications                      │
-
-│            (Web, Mobile, Desktop, Postman, etc.)            │- **User**: Base user with authentication credentials and roles
-
-└─────────────────────────────────────────────────────────────┘- **Student**: Student profile linked to User
-
-                              │- **Programme**: Academic programmes (e.g., BSc Computer Science)
-
-                    ┌─────────▼─────────┐- **Course**: Individual courses with programme, level, and semester
-
-                    │   JWT Auth Layer  │- **CourseAssignment**: Links instructors to courses
-
-                    │  (Bearer Token)    │- **CourseRegistration**: Student course enrollments
-
-                    └─────────┬─────────┘- **RegistrationStatus**: Controls when registration is open/closed
-
-                              │
-
-┌─────────────────────────────▼─────────────────────────────┐### Enums
-
-│                      REST API Layer                        │
-
-│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐    │- **Role**: ADMIN, INSTRUCTOR, STUDENT
-
-│  │   Auth   │ │  Admin   │ │Instructor│ │ Student  │    │- **Level**: LEVEL100, LEVEL200, LEVEL300, LEVEL400
-
-│  │Controller│ │Controller│ │Controller│ │Controller│    │- **Semester**: FIRST, SECOND
-
-│  └──────────┘ └──────────┘ └──────────┘ └──────────┘    │
-
-└────────────────────────────┬──────────────────────────────┘## 🔐 Security
-
-                              │
-
-┌─────────────────────────────▼─────────────────────────────┐- JWT-based authentication
-
-│                      Service Layer                         │- Role-based access control (RBAC)
-
-│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐    │- Password encryption using BCrypt
-
-│  │   Auth   │ │  Admin   │ │Instructor│ │ Student  │    │- Stateless session management
-
-│  │ Service  │ │ Service  │ │ Service  │ │ Service  │    │- Secured endpoints per role
-
-│  └──────────┘ └──────────┘ └──────────┘ └──────────┘    │
-
-└────────────────────────────┬──────────────────────────────┘## 🚀 Getting Started
-
-                              │
-
-┌─────────────────────────────▼─────────────────────────────┐### Prerequisites
-
-│                    Repository Layer                        │
-
-│  (Spring Data JPA - Hibernate ORM)                        │- Java 17 or higher
-
-└────────────────────────────┬──────────────────────────────┘- Maven 3.6+
-
-                              │- PostgreSQL 12+ (or use H2 for development)
-
-┌─────────────────────────────▼─────────────────────────────┐
-
-│                 PostgreSQL Database (Neon)                 │### Database Setup
-
-│  Tables: users, students, instructors, programmes,        │
-
-│  courses, course_assignments, course_registrations        │1. Create a PostgreSQL database:
-
-└───────────────────────────────────────────────────────────┘
-
-``````sql
-
-CREATE DATABASE course_registration_db;
-
-## 🛠️ Technology Stack```
-
-
-
-| Layer | Technology |2. Update `src/main/resources/application.yml` with your database credentials:
-
-|-------|-----------|
-
-| **Backend Framework** | Spring Boot 3.2.0 |```yaml
-
-| **Language** | Java 17 |spring:
-
-| **Security** | Spring Security + JWT (jsonwebtoken 0.12.3) |  datasource:
-
-| **ORM** | Spring Data JPA + Hibernate 6.3.1 |    url: jdbc:postgresql://localhost:5432/course_registration_db
-
-| **Database** | PostgreSQL 15 (Neon Serverless) |    username: your_username
-
-| **Validation** | Jakarta Validation (Bean Validation 3.0) |    password: your_password
-
-| **Documentation** | Springdoc OpenAPI 3.0 (Swagger UI 2.2.0) |```
-
-| **Build Tool** | Maven 3.8.7 |
-
-| **Utilities** | Lombok |### Build and Run
-
-
-
-## 🚀 Getting Started```bash
-
-# Clone the repository
-
-### Prerequisitescd student-course-allocation
-
-
-
-- **Java 17** or higher# Build the project
-
-- **Maven 3.6+**mvn clean install
-
-- **PostgreSQL** (or Neon account for cloud database)
-
-- **Git**# Run the application
-
-mvn spring-boot:run
-
-### Installation```
-
-
-
-1. **Clone the repository**The application will start on `http://localhost:8080`
+   Copy the example file and add your credentials:- 🏫 Create and manage academic programmes (BSc CS, BSc IT, etc.)├─────────────────────────────────────┤
 
    ```bash
 
-   git clone https://github.com/yourusername/student-course-allocation.git## 📋 Sample Data
+   cp .env.example .env- 📖 Create and manage courses with prerequisites│ Repository Layer (Data Access) │
 
-   cd student-course-allocation
+   ```
 
-   ```The application automatically loads sample data on first run:
+   - 👨‍🎓 Create student accounts with programme assignment├─────────────────────────────────────┤
 
+   Edit `.env` with your database details:
 
-
-2. **Set up environment variables**### Login Credentials
-
-
-
-   Create a `.env` file in the project root (or copy from `.env.example`):| Role       | Username  | Password      |
-
-   ```bash| ---------- | --------- | ------------- |
-
-   cp .env.example .env| Admin      | admin     | admin123      |
-
-   ```| Instructor | dr.mensah | instructor123 |
-
-   | Instructor | dr.asante | instructor123 |
-
-   Edit `.env` with your database credentials:| Student    | student1  | student123    |
-
-   ```properties| Student    | student2  | student123    |
+   ````properties- 👨‍🏫 Create instructor accounts and manage profiles│ Domain Layer (Entities) │
 
    DATABASE_URL=jdbc:postgresql://your-host:5432/your-database?sslmode=require
 
-   DATABASE_USERNAME=your-username### Pre-loaded Data
+   DATABASE_USERNAME=your-username- 🔗 Assign instructors to courses└─────────────────────────────────────┘
 
    DATABASE_PASSWORD=your-password
 
-   JWT_SECRET=your-secret-key-min-256-bits- **Programmes**: BSc Computer Science, BSc Information Technology
+   JWT_SECRET=your-secret-key-min-256-bits- 🗓️ Open and close course registration periods```
 
-   ```- **Courses**: DCIT201, DCIT203, DCIT205, DCIT207
+   ````
 
-- **Registration Status**: Open for First Semester 2024/2025
+- 📈 Full system oversight
 
 3. **Build the project**
 
-   ```bash## 🔌 API Endpoints
+   ````bash### Technology Stack
 
    mvn clean install
 
-   ```### Authentication
+   ```### System Features
 
+   ````
 
-
-4. **Run the application**#### Login
+4. **Run the application**- 🔐 JWT-based stateless authentication- **Java 17**
 
    ```bash
 
-   mvn spring-boot:run```http
+   mvn spring-boot:run- 🛡️ Role-based access control (RBAC)- **Spring Boot 3.2.0**
 
-   ```POST /auth/login
+   ```
 
-Content-Type: application/json
+- 📝 Comprehensive input validation- **Spring Security** with JWT authentication
 
-   The application will start on `http://localhost:8080`
+  Server starts at `http://localhost:8080`
 
-{
+- ⚠️ Global exception handling- **Spring Data JPA** with Hibernate
 
-5. **Access Swagger UI**  "username": "student1",
+### Quick Test
 
-     "password": "student123"
+- 📊 Interactive Swagger/OpenAPI documentation- **PostgreSQL** (primary database)
 
-   Open your browser and navigate to:}
+The application loads sample data automatically:
 
-```````
+- 🗄️ PostgreSQL database with Neon cloud hosting- **H2** (testing)
 
-http://localhost:8080/swagger-ui.htmlResponse:
+| Role | Username | Password |
 
-````{
-
-"token": "eyJhbGc...",
-
-### Quick Start with Sample Data  "type": "Bearer",
-
-"username": "student1",
-
-The application automatically loads sample data on first run:  "role": "STUDENT",
-
-"message": "Login successful"
-
-| Role | Username | Password |}
-
-|------|----------|----------|```
+|------|----------|----------|- 🚀 RESTful API design- **Lombok** (reduce boilerplate)
 
 | Admin | admin | admin123 |
 
-| Instructor | dr.mensah | instructor123 |### Admin Endpoints
+| Instructor | dr.mensah | instructor123 |- 📱 CORS-enabled for frontend integration- **Maven** (build tool)
 
-| Instructor | dr.asante | instructor123 |
+| Student | student1 | student123 |
 
-| Student | student1 | student123 |All admin endpoints require `ROLE_ADMIN` and a valid JWT token in the `Authorization` header:
+- **Bean Validation** (DTO validation)
 
-| Student | student2 | student123 |
+## 📚 API Documentation
 
-````
+## 🏗️ System Architecture
 
-## 📚 API DocumentationAuthorization: Bearer <token>
+### Interactive Swagger UI
 
-````
+## 📦 Domain Model
 
-### Interactive Documentation (Swagger UI)
+Access the interactive API documentation at:
 
-#### Programme Management
+````````
+
+```
+
+http://localhost:8080/swagger-ui.html┌─────────────────────────────────────────────────────────────┐### Entities
+
+```
+
+│                     Client Applications                      │
+
+![Swagger UI Interface](img/swagger-interface-screenshot.png)
+
+│            (Web, Mobile, Desktop, Postman, etc.)            │- **User**: Base user with authentication credentials and roles
+
+### Using the API
+
+└─────────────────────────────────────────────────────────────┘- **Student**: Student profile linked to User
+
+1. **Login to get JWT token:**
+
+   ```bash                              │- **Programme**: Academic programmes (e.g., BSc Computer Science)
+
+   curl -X POST http://localhost:8080/auth/login \
+
+     -H "Content-Type: application/json" \                    ┌─────────▼─────────┐- **Course**: Individual courses with programme, level, and semester
+
+     -d '{"username":"student1","password":"student123"}'
+
+   ```                    │   JWT Auth Layer  │- **CourseAssignment**: Links instructors to courses
+
+
+
+2. **Use token in requests:**                    │  (Bearer Token)    │- **CourseRegistration**: Student course enrollments
+
+   ```bash
+
+   curl -X GET http://localhost:8080/student/courses \                    └─────────┬─────────┘- **RegistrationStatus**: Controls when registration is open/closed
+
+     -H "Authorization: Bearer YOUR_JWT_TOKEN"
+
+   ```                              │
+
+
+
+3. **In Swagger UI:**┌─────────────────────────────▼─────────────────────────────┐### Enums
+
+   - Click "Authorize" 🔒 button
+
+   - Enter: `Bearer YOUR_JWT_TOKEN`│                      REST API Layer                        │
+
+   - Test endpoints interactively
+
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐    │- **Role**: ADMIN, INSTRUCTOR, STUDENT
+
+### API Endpoints Overview
+
+│  │   Auth   │ │  Admin   │ │Instructor│ │ Student  │    │- **Level**: LEVEL100, LEVEL200, LEVEL300, LEVEL400
+
+#### Authentication (Public)
+
+- `POST /auth/login` - User login│  │Controller│ │Controller│ │Controller│ │Controller│    │- **Semester**: FIRST, SECOND
+
+
+
+#### Admin Endpoints│  └──────────┘ └──────────┘ └──────────┘ └──────────┘    │
+
+- `POST /admin/programmes` - Create programme
+
+- `POST /admin/courses` - Create course└────────────────────────────┬──────────────────────────────┘## 🔐 Security
+
+- `POST /admin/students` - Create student
+
+- `POST /admin/instructors` - Create instructor                              │
+
+- `POST /admin/courses/{courseId}/assign-instructor` - Assign instructor
+
+- `POST /admin/registration/open` - Open registration┌─────────────────────────────▼─────────────────────────────┐- JWT-based authentication
+
+- `GET /admin/programmes` - List programmes
+
+- `GET /admin/courses` - List courses│                      Service Layer                         │- Role-based access control (RBAC)
+
+- `GET /admin/students` - List students
+
+- `GET /admin/instructors` - List instructors│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐    │- Password encryption using BCrypt
+
+
+
+#### Instructor Endpoints│  │   Auth   │ │  Admin   │ │Instructor│ │ Student  │    │- Stateless session management
+
+- `GET /instructor/courses` - Get assigned courses
+
+- `GET /instructor/courses/{courseId}/students` - Get course students│  │ Service  │ │ Service  │ │ Service  │ │ Service  │    │- Secured endpoints per role
+
+
+
+#### Student Endpoints│  └──────────┘ └──────────┘ └──────────┘ └──────────┘    │
+
+- `GET /student/courses` - Get available courses
+
+- `POST /student/register` - Register for course└────────────────────────────┬──────────────────────────────┘## 🚀 Getting Started
+
+- `GET /student/registrations` - Get my registrations
+
+                              │
+
+## 👥 User Roles
+
+┌─────────────────────────────▼─────────────────────────────┐### Prerequisites
+
+### Permission Matrix
+
+│                    Repository Layer                        │
+
+| Feature | Admin | Instructor | Student |
+
+|---------|-------|------------|---------|│  (Spring Data JPA - Hibernate ORM)                        │- Java 17 or higher
+
+| Create Programme | ✅ | ❌ | ❌ |
+
+| Create Course | ✅ | ❌ | ❌ |└────────────────────────────┬──────────────────────────────┘- Maven 3.6+
+
+| Create Users | ✅ | ❌ | ❌ |
+
+| Assign Instructors | ✅ | ❌ | ❌ |                              │- PostgreSQL 12+ (or use H2 for development)
+
+| Control Registration | ✅ | ❌ | ❌ |
+
+| View Assigned Courses | ✅ | ✅ | ❌ |┌─────────────────────────────▼─────────────────────────────┐
+
+| View Course Students | ✅ | ✅ (own) | ❌ |
+
+| Register for Courses | ❌ | ❌ | ✅ |│                 PostgreSQL Database (Neon)                 │### Database Setup
+
+| View Registrations | ❌ | ❌ | ✅ |
+
+│  Tables: users, students, instructors, programmes,        │
+
+## 🔒 Security
+
+│  courses, course_assignments, course_registrations        │1. Create a PostgreSQL database:
+
+### Authentication Flow
+
+└───────────────────────────────────────────────────────────┘
+
+```
+
+User Login → JWT Token → Authorization Header → Protected Endpoints``````sql
+
+```
+
+CREATE DATABASE course_registration_db;
+
+### Security Features
+
+## 🛠️ Technology Stack```
+
+- ✅ Stateless JWT authentication
+
+- ✅ BCrypt password hashing
+
+- ✅ Role-based access control (RBAC)
+
+- ✅ Input validation| Layer | Technology |2. Update `src/main/resources/application.yml` with your database credentials:
+
+- ✅ SQL injection prevention
+
+- ✅ 24-hour token expiration|-------|-----------|
+
+- ✅ Environment variable protection
+
+| **Backend Framework** | Spring Boot 3.2.0 |```yaml
+
+### Protecting Credentials
+
+| **Language** | Java 17 |spring:
+
+**⚠️ NEVER commit `.env` file to Git!**
+
+| **Security** | Spring Security + JWT (jsonwebtoken 0.12.3) |  datasource:
+
+This project uses:
+
+- `.env` file for sensitive data (gitignored)| **ORM** | Spring Data JPA + Hibernate 6.3.1 |    url: jdbc:postgresql://localhost:5432/course_registration_db
+
+- `.env.example` as template
+
+- Environment variables in `application.yml`| **Database** | PostgreSQL 15 (Neon Serverless) |    username: your_username
+
+
+
+See [SECURITY_GUIDE.md](SECURITY_GUIDE.md) for details.| **Validation** | Jakarta Validation (Bean Validation 3.0) |    password: your_password
+
+
+
+## 📁 Project Structure| **Documentation** | Springdoc OpenAPI 3.0 (Swagger UI 2.2.0) |```
+
+
+
+```| **Build Tool** | Maven 3.8.7 |
+
+src/main/java/com/example/registration/
+
+├── config/              # Configuration classes| **Utilities** | Lombok |### Build and Run
+
+├── controller/          # REST API endpoints
+
+├── domain/              # JPA entities
+
+├── dto/                 # Data Transfer Objects
+
+├── exception/           # Exception handling## 🚀 Getting Started```bash
+
+├── repository/          # Data access layer
+
+├── security/            # Security & JWT config# Clone the repository
+
+└── service/             # Business logic
+
+    └── impl/            # Service implementations### Prerequisitescd student-course-allocation
+
+```
+
+
+
+### Key Components
+
+- **Java 17** or higher# Build the project
+
+- **Domain Entities**: User, Student, Instructor, Programme, Course, CourseRegistration
+
+- **Security**: JWT token provider, authentication filter, security config- **Maven 3.6+**mvn clean install
+
+- **Controllers**: Auth, Admin, Instructor, Student
+
+- **Services**: Business logic for each role- **PostgreSQL** (or Neon account for cloud database)
+
+- **Repositories**: Spring Data JPA repositories
+
+- **Git**# Run the application
+
+## 📖 Documentation
+
+mvn spring-boot:run
+
+Comprehensive guides are available:
+
+### Installation```
+
+- **[QUICKSTART.md](QUICKSTART.md)** - Get started quickly
+
+- **[API_TESTING.md](API_TESTING.md)** - API testing guide
+
+- **[SWAGGER_GUIDE.md](SWAGGER_GUIDE.md)** - Swagger documentation
+
+- **[DATABASE_SCHEMA.md](DATABASE_SCHEMA.md)** - Database structure1. **Clone the repository**The application will start on `http://localhost:8080`
+
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Deployment guide
+
+- **[NEON_SETUP.md](NEON_SETUP.md)** - Neon database setup   ```bash
+
+- **[SECURITY_GUIDE.md](SECURITY_GUIDE.md)** - Security best practices
+
+   git clone https://github.com/yourusername/student-course-allocation.git## 📋 Sample Data
+
+## 🧪 Testing
+
+   cd student-course-allocation
+
+### With Swagger UI
+
+1. Start application: `mvn spring-boot:run`   ```The application automatically loads sample data on first run:
+
+2. Open: http://localhost:8080/swagger-ui.html
+
+3. Login with test credentials
+
+4. Authorize with JWT token
+
+5. Test endpoints interactively2. **Set up environment variables**### Login Credentials
+
+
+
+### With cURL
+
+```bash
+
+# Login   Create a `.env` file in the project root (or copy from `.env.example`):| Role       | Username  | Password      |
+
+TOKEN=$(curl -X POST http://localhost:8080/auth/login \
+
+  -H "Content-Type: application/json" \   ```bash| ---------- | --------- | ------------- |
+
+  -d '{"username":"admin","password":"admin123"}' | jq -r '.token')
+
+   cp .env.example .env| Admin      | admin     | admin123      |
+
+# Create Programme
+
+curl -X POST http://localhost:8080/admin/programmes \   ```| Instructor | dr.mensah | instructor123 |
+
+  -H "Authorization: Bearer $TOKEN" \
+
+  -H "Content-Type: application/json" \   | Instructor | dr.asante | instructor123 |
+
+  -d '{"code":"BSC-MATH","name":"BSc Mathematics","description":"Mathematics programme"}'
+
+```   Edit `.env` with your database credentials:| Student    | student1  | student123    |
+
+
+
+## 🚀 Deployment   ```properties| Student    | student2  | student123    |
+
+
+
+### Build for Production   DATABASE_URL=jdbc:postgresql://your-host:5432/your-database?sslmode=require
+
+```bash
+
+mvn clean package   DATABASE_USERNAME=your-username### Pre-loaded Data
+
+java -jar target/student-course-allocation-1.0.0.jar
+
+```   DATABASE_PASSWORD=your-password
+
+
+
+### Docker Deployment   JWT_SECRET=your-secret-key-min-256-bits- **Programmes**: BSc Computer Science, BSc Information Technology
+
+```dockerfile
+
+FROM openjdk:17-jdk-slim   ```- **Courses**: DCIT201, DCIT203, DCIT205, DCIT207
+
+COPY target/*.jar app.jar
+
+EXPOSE 8080- **Registration Status**: Open for First Semester 2024/2025
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
+```3. **Build the project**
+
+
+
+### Cloud Platforms   ```bash## 🔌 API Endpoints
+
+- **Heroku** - Git-based deployment
+
+- **Railway** - GitHub auto-deployment   mvn clean install
+
+- **Render** - Free tier with PostgreSQL
+
+- **AWS/GCP** - Enterprise deployment   ```### Authentication
+
+
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions.
+
+
+
+## 🗄️ Database Schema4. **Run the application**#### Login
+
+
+
+### Core Tables   ```bash
+
+- **users** - Authentication & roles
+
+- **students** - Student profiles   mvn spring-boot:run```http
+
+- **instructors** - Instructor profiles
+
+- **programmes** - Academic programmes   ```POST /auth/login
+
+- **courses** - Course catalog
+
+- **course_assignments** - Instructor assignmentsContent-Type: application/json
+
+- **course_registrations** - Student enrollments
+
+- **registration_status** - Registration control   The application will start on `http://localhost:8080`
+
+
+
+### Key Relationships{
+
+- User → Student (1:1)
+
+- User → Instructor (1:1)5. **Access Swagger UI**  "username": "student1",
+
+- Student → Programme (N:1)
+
+- Course → Programme (N:1)     "password": "student123"
+
+- CourseRegistration → Student + Course (N:1)
+
+- CourseAssignment → Instructor + Course (N:1)   Open your browser and navigate to:}
+
+
+
+## ⚙️ Configuration```````
+
+
+
+### Application Propertieshttp://localhost:8080/swagger-ui.htmlResponse:
+
+Located in `src/main/resources/application.yml`:
+
+````{
+
+```yaml
+
+spring:"token": "eyJhbGc...",
+
+  datasource:
+
+    url: ${DATABASE_URL}### Quick Start with Sample Data  "type": "Bearer",
+
+    username: ${DATABASE_USERNAME}
+
+    password: ${DATABASE_PASSWORD}"username": "student1",
+
+
+
+jwt:The application automatically loads sample data on first run:  "role": "STUDENT",
+
+  secret: ${JWT_SECRET}
+
+  expiration: 86400000  # 24 hours"message": "Login successful"
+
+```
+
+| Role | Username | Password |}
+
+### Environment Variables
+
+Required variables in `.env`:|------|----------|----------|```
+
+- `DATABASE_URL` - PostgreSQL connection string
+
+- `DATABASE_USERNAME` - Database username| Admin | admin | admin123 |
+
+- `DATABASE_PASSWORD` - Database password
+
+- `JWT_SECRET` - Secret key for JWT (256+ bits)| Instructor | dr.mensah | instructor123 |### Admin Endpoints
+
+
+
+## 🤝 Contributing| Instructor | dr.asante | instructor123 |
+
+
+
+1. Fork the repository| Student | student1 | student123 |All admin endpoints require `ROLE_ADMIN` and a valid JWT token in the `Authorization` header:
+
+2. Create feature branch: `git checkout -b feature/amazing-feature`
+
+3. Commit changes: `git commit -m 'Add amazing feature'`| Student | student2 | student123 |
+
+4. Push to branch: `git push origin feature/amazing-feature`
+
+5. Open Pull Request````
+
+
+
+## 📝 License## 📚 API DocumentationAuthorization: Bearer <token>
+
+
+
+This project is licensed under the MIT License.````
+
+
+
+## 📧 Contact### Interactive Documentation (Swagger UI)
+
+
+
+- **Repository**: [Students-Course-Allocation](https://github.com/kkbaidu/Students-Course-Allocation)#### Programme Management
+
+- **Issues**: [GitHub Issues](https://github.com/kkbaidu/Students-Course-Allocation/issues)
 
 The best way to explore and test the API is through the interactive Swagger UI:
 
+## 🙏 Acknowledgments
+
 ```http
 
-![Swagger UI Interface](img/swagger-interface-screenshot.png)# Create Programme
+- Inspired by University of Ghana MIS Web System
 
-POST /admin/programmes
+- Built with Spring Boot ecosystem![Swagger UI Interface](img/swagger-interface-screenshot.png)# Create Programme
 
-**Access Swagger UI:** http://localhost:8080/swagger-ui.html{
+- Database hosted on Neon PostgreSQL
 
-  "code": "BSC-CS",
+- Documentation powered by Springdoc OpenAPIPOST /admin/programmes
 
-### API Endpoints Overview  "name": "BSc Computer Science",
 
-  "description": "Bachelor of Science in Computer Science",
 
-#### 🔓 Authentication Endpoints (Public)  "active": true
+---**Access Swagger UI:** http://localhost:8080/swagger-ui.html{
+
+
+
+<div align="center">  "code": "BSC-CS",
+
+
+
+**⭐ Star this repo if you find it helpful!**### API Endpoints Overview  "name": "BSc Computer Science",
+
+
+
+Made with ❤️ using Spring Boot  "description": "Bachelor of Science in Computer Science",
+
+
+
+</div>#### 🔓 Authentication Endpoints (Public)  "active": true
+
 
 ```http}
 
@@ -1153,10 +1502,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact & Support
 
-- **Developer:** Your Name
-- **Email:** your.email@example.com
-- **GitHub:** [@yourusername](https://github.com/yourusername)
-- **Issues:** [GitHub Issues](https://github.com/yourusername/student-course-allocation/issues)
+- **Developer:** Kingsley Korankye Baidu
+- **Email:** kingsleybaidu99@gmail.com
+- **GitHub:** [@kkbaidu](https://github.com/yourusername)
+- **Issues:** [GitHub Issues](https://github.com/kkbaidu/student-course-allocation/issues)
 
 ## 🙏 Acknowledgments
 
@@ -1209,3 +1558,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Made with ❤️ for University Course Registration
 
 </div>
+````````
