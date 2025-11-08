@@ -28,6 +28,15 @@ public class AdminController {
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
     
+    @PutMapping("/programmes/{id}")
+    @Operation(summary = "Update programme", description = "Update an existing programme by ID")
+    public ResponseEntity<ProgrammeDto> updateProgramme(
+            @PathVariable Long id, 
+            @Valid @RequestBody ProgrammeDto dto) {
+        ProgrammeDto updated = adminService.updateProgramme(id, dto);
+        return ResponseEntity.ok(updated);
+    }
+    
     @GetMapping("/programmes")
     public ResponseEntity<List<ProgrammeDto>> getAllProgrammes() {
         List<ProgrammeDto> programmes = adminService.getAllProgrammes();
@@ -45,6 +54,15 @@ public class AdminController {
     public ResponseEntity<CourseDto> createCourse(@Valid @RequestBody CourseDto dto) {
         CourseDto created = adminService.createCourse(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
+    }
+    
+    @PutMapping("/courses/{id}")
+    @Operation(summary = "Update course", description = "Update an existing course by ID")
+    public ResponseEntity<CourseDto> updateCourse(
+            @PathVariable Long id, 
+            @Valid @RequestBody CourseDto dto) {
+        CourseDto updated = adminService.updateCourse(id, dto);
+        return ResponseEntity.ok(updated);
     }
     
     @GetMapping("/courses")
@@ -76,6 +94,15 @@ public class AdminController {
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
     
+    @PutMapping("/students/{id}")
+    @Operation(summary = "Update student", description = "Update an existing student account by ID")
+    public ResponseEntity<StudentDto> updateStudent(
+            @PathVariable Long id,
+            @Valid @RequestBody CreateStudentDto dto) {
+        StudentDto updated = adminService.updateStudent(id, dto);
+        return ResponseEntity.ok(updated);
+    }
+    
     @GetMapping("/students")
     @Operation(summary = "Get all students", description = "Retrieve list of all registered students")
     public ResponseEntity<List<StudentDto>> getAllStudents() {
@@ -89,6 +116,15 @@ public class AdminController {
     public ResponseEntity<InstructorDto> createInstructor(@Valid @RequestBody CreateInstructorDto dto) {
         InstructorDto created = adminService.createInstructor(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
+    }
+    
+    @PutMapping("/instructors/{id}")
+    @Operation(summary = "Update instructor", description = "Update an existing instructor account by ID")
+    public ResponseEntity<InstructorDto> updateInstructor(
+            @PathVariable Long id,
+            @Valid @RequestBody CreateInstructorDto dto) {
+        InstructorDto updated = adminService.updateInstructor(id, dto);
+        return ResponseEntity.ok(updated);
     }
     
     @GetMapping("/instructors")

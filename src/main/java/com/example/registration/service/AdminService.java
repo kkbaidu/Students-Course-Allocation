@@ -9,11 +9,13 @@ public interface AdminService {
     
     // Programme Management
     ProgrammeDto createProgramme(ProgrammeDto programmeDto);
+    ProgrammeDto updateProgramme(Long id, ProgrammeDto programmeDto);
     List<ProgrammeDto> getAllProgrammes();
     ProgrammeDto getProgrammeById(Long id);
     
     // Course Management
     CourseDto createCourse(CourseDto courseDto);
+    CourseDto updateCourse(Long id, CourseDto courseDto);
     List<CourseDto> getAllCourses();
     CourseDto getCourseById(Long id);
     
@@ -22,10 +24,12 @@ public interface AdminService {
     
     // Student Management
     StudentDto createStudent(CreateStudentDto dto);
+    StudentDto updateStudent(Long id, CreateStudentDto dto);
     List<StudentDto> getAllStudents();
     
     // Instructor Management
     InstructorDto createInstructor(CreateInstructorDto dto);
+    InstructorDto updateInstructor(Long id, CreateInstructorDto dto);
     List<InstructorDto> getAllInstructors();
     InstructorDto getInstructorById(Long id);
     

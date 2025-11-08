@@ -5,9 +5,9 @@ spring:
   datasource:
     # Database connection - uses environment variables from .env file
     # See .env.example for template
-    url: ${DATABASE_URL}
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
+    url: ${DATABASE_URL:jdbc:postgresql://ep-orange-poetry-adv53znt-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require}
+    username: ${DATABASE_USERNAME:neondb_owner}
+    password: ${DATABASE_PASSWORD:npg_oG2gYADukje0}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -16,7 +16,6 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     open-in-view: false
 

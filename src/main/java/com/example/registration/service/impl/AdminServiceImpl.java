@@ -47,6 +47,25 @@ public class AdminServiceImpl implements AdminService {
     }
     
     @Override
+    public ProgrammeDto updateProgramme(Long id, ProgrammeDto dto) {
+        Programme programme = programmeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Programme", "id", id));
+        
+        // Check if code is being changed and if new code already exists
+        if (!programme.getCode().equals(dto.getCode()) && programmeRepository.existsByCode(dto.getCode())) {
+            throw new DuplicateResourceException("Programme with code " + dto.getCode() + " already exists");
+        }
+        
+        programme.setCode(dto.getCode());
+        programme.setName(dto.getName());
+        programme.setDescription(dto.getDescription());
+        programme.setActive(dto.isActive());
+        
+        Programme updated = programmeRepository.save(programme);
+        return mapToProgrammeDto(updated);
+    }
+    
+    @Override
     public List<ProgrammeDto> getAllProgrammes() {
         return programmeRepository.findAll().stream()
                 .map(this::mapToProgrammeDto)
@@ -81,6 +100,32 @@ public class AdminServiceImpl implements AdminService {
         
         Course saved = courseRepository.save(course);
         return mapToCourseDto(saved);
+    }
+    
+    @Override
+    public CourseDto updateCourse(Long id, CourseDto dto) {
+        Course course = courseRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Course", "id", id));
+        
+        // Check if course code is being changed and if new code already exists
+        if (!course.getCourseCode().equals(dto.getCourseCode()) && courseRepository.existsByCourseCode(dto.getCourseCode())) {
+            throw new DuplicateResourceException("Course with code " + dto.getCourseCode() + " already exists");
+        }
+        
+        Programme programme = programmeRepository.findById(dto.getProgrammeId())
+                .orElseThrow(() -> new ResourceNotFoundException("Programme", "id", dto.getProgrammeId()));
+        
+        course.setCourseCode(dto.getCourseCode());
+        course.setCourseName(dto.getCourseName());
+        course.setDescription(dto.getDescription());
+        course.setCreditHours(dto.getCreditHours());
+        course.setProgramme(programme);
+        course.setLevel(dto.getLevel());
+        course.setSemester(dto.getSemester());
+        course.setActive(dto.isActive());
+        
+        Course updated = courseRepository.save(course);
+        return mapToCourseDto(updated);
     }
     
     @Override
@@ -165,6 +210,51 @@ public class AdminServiceImpl implements AdminService {
     }
     
     @Override
+    public StudentDto updateStudent(Long id, CreateStudentDto dto) {
+        Student student = studentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Student", "id", id));
+        
+        User user = student.getUser();
+        
+        // Check if username is being changed and if new username already exists
+        if (!user.getUsername().equals(dto.getUsername()) && userRepository.existsByUsername(dto.getUsername())) {
+            throw new DuplicateResourceException("Username already exists");
+        }
+        
+        // Check if email is being changed and if new email already exists
+        if (!user.getEmail().equals(dto.getEmail()) && userRepository.existsByEmail(dto.getEmail())) {
+            throw new DuplicateResourceException("Email already exists");
+        }
+        
+        // Check if student ID is being changed and if new student ID already exists
+        if (!student.getStudentId().equals(dto.getStudentId()) && studentRepository.existsByStudentId(dto.getStudentId())) {
+            throw new DuplicateResourceException("Student ID already exists");
+        }
+        
+        Programme programme = programmeRepository.findById(dto.getProgrammeId())
+                .orElseThrow(() -> new ResourceNotFoundException("Programme", "id", dto.getProgrammeId()));
+        
+        // Update User
+        user.setUsername(dto.getUsername());
+        if (dto.getPassword() != null && !dto.getPassword().isEmpty()) {
+            user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        }
+        user.setFirstName(dto.getFirstName());
+        user.setLastName(dto.getLastName());
+        user.setEmail(dto.getEmail());
+        userRepository.save(user);
+        
+        // Update Student
+        student.setStudentId(dto.getStudentId());
+        student.setProgramme(programme);
+        student.setLevel(dto.getLevel());
+        student.setYearOfAdmission(dto.getYearOfAdmission());
+        Student updatedStudent = studentRepository.save(student);
+        
+        return mapToStudentDto(updatedStudent);
+    }
+    
+    @Override
     public List<StudentDto> getAllStudents() {
         return studentRepository.findAll().stream()
                 .map(this::mapToStudentDto)
@@ -199,6 +289,40 @@ public class AdminServiceImpl implements AdminService {
         Instructor savedInstructor = instructorRepository.save(instructor);
         
         return mapToInstructorDto(savedInstructor);
+    }
+    
+    @Override
+    public InstructorDto updateInstructor(Long id, CreateInstructorDto dto) {
+        Instructor instructor = instructorRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Instructor", "id", id));
+        
+        User user = instructor.getUser();
+        
+        // Check if username is being changed and if new username already exists
+        if (!user.getUsername().equals(dto.getUsername()) && userRepository.existsByUsername(dto.getUsername())) {
+            throw new DuplicateResourceException("Username already exists");
+        }
+        
+        // Check if email is being changed and if new email already exists
+        if (!user.getEmail().equals(dto.getEmail()) && userRepository.existsByEmail(dto.getEmail())) {
+            throw new DuplicateResourceException("Email already exists");
+        }
+        
+        // Update User
+        user.setUsername(dto.getUsername());
+        if (dto.getPassword() != null && !dto.getPassword().isEmpty()) {
+            user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        }
+        user.setEmail(dto.getEmail());
+        userRepository.save(user);
+        
+        // Update Instructor
+        instructor.setFullName(dto.getFullName());
+        instructor.setDepartment(dto.getDepartment());
+        instructor.setTitle(dto.getTitle());
+        Instructor updatedInstructor = instructorRepository.save(instructor);
+        
+        return mapToInstructorDto(updatedInstructor);
     }
     
     @Override
